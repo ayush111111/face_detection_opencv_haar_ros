@@ -8,3 +8,4 @@ Cascades using OpenCV. The frames with detected faces should be published to the
 second ROS node, which crops the bounding box (detected face) from the Image
 subscribed.
 
+Output screenshot uploaded
