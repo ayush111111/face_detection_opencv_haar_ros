@@ -1,0 +1,1 @@
+/home/ayushlokare/catkin_ws/src/face_detect/devel/.private/catkin_tools_prebuild/env.sh

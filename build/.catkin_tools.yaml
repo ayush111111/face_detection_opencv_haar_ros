@@ -1,0 +1,6 @@
+devel_space: /home/ayushlokare/catkin_ws/src/face_detect/devel
+install: false
+install_space: /home/ayushlokare/catkin_ws/src/face_detect/install
+profile: default
+source_space: /home/ayushlokare/catkin_ws/src/face_detect/src
+workspace: /home/ayushlokare/catkin_ws/src/face_detect
