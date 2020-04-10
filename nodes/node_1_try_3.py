@@ -3,13 +3,7 @@ import rospy
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 import cv2
-import numpy as np
-from face_detect.msg import image_and_rec_box
-from face_detect.msg import image_msg
-
-
-
-
+from face_detect.msg import rectan
 
 def image_callback(img):
 
@@ -19,23 +13,23 @@ def image_callback(img):
    
 	gray=cv2.cvtColor(cv_image,cv2.COLOR_BGR2GRAY)
 
-	faces=face_cascade.detectMultiScale(gray,scaleFactor=1.1,minNeighbors=5)
+	faces=face_cascade.detectMultiScale(gray,scaleFactor=1.05,minNeighbors=4)
 
         for (x,y,w,h) in faces:
-            cv_image = cv2.rectangle(cv_image,(x,y),(x+w,y+h),(255,0,0),2)
-            roi_color = cv_image[y:y+h, x:x+w]
-          
-        cv2.imshow('window', cv_image)
+            rec = rectan()
+            rec.x=x
+            rec.y=y
+            rec.w=w
+            rec.h=h
 
-        if cv2.waitKey(1) & 0xFF == ord('q') :
-         cv2.destroyAllWindows()
-        
-        
-          
+            pub2.publish(rec)
+            '''cv_image = cv2.rectangle(cv_image,(x,y),(x+w,y+h),(255,0,0),2)
+            roi_color = cv_image[y:y+h, x:x+w]'''
+                  
         if len(faces) > 0 :
-          ros_image = bridge.cv2_to_imgmsg(roi_color, "bgr8")  
-          msg = image_msg()
-          pub.publish(ros_image)
+            ros_image = bridge.cv2_to_imgmsg(cv_image, "bgr8")  
+          
+            pub.publish(ros_image)
                   
 
 if __name__ == '__main__':
@@ -49,6 +43,7 @@ if __name__ == '__main__':
          sub = rospy.Subscriber("/usb_cam/image_raw", Image, image_callback)
       
          pub=rospy.Publisher("/faces", Image, queue_size=10) 
+         pub2=rospy.Publisher("/rectangle", rectan)
 
          rospy.spin()
 
