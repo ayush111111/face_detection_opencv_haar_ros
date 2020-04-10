@@ -19,4 +19,4 @@ subscribed.
 
 
 ![](https://github.com/ayush111111/face_detection_opencv_haar_ros/blob/master/Screenshot%20from%202020-04-10%2023-31-14.png)
--Trying to build a custom message that sends coordinates of detected face from node_1 to node_2 along with the Frame containing the face
+
